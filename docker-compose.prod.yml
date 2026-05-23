@@ -7,12 +7,17 @@ services:
       - APP_ENV=production
       - APP_DEBUG=false
       - APP_KEY=${APP_KEY}
+      - APP_URL=${APP_URL:-http://academy.facultysys.it.com}
       - DB_CONNECTION=mysql
       - DB_HOST=db
       - DB_PORT=3306
       - DB_DATABASE=${DB_DATABASE:-ethno_capstone}
       - DB_USERNAME=${DB_USERNAME:-ethno_user}
       - DB_PASSWORD=${DB_PASSWORD:-ethno_password}
+      # File drivers avoid 500s when sessions/cache tables are missing or migrations lag
+      - SESSION_DRIVER=file
+      - CACHE_STORE=file
+      - QUEUE_CONNECTION=sync
       - RUN_MIGRATIONS=true
     depends_on:
       - db
