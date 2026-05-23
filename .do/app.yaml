@@ -1,0 +1,23 @@
+name: ip-healers-academy
+services:
+  - name: web
+    github:
+      repo: fotsuu/ip-healers-academy
+      branch: main
+      deploy_on_push: true
+    dockerfile_path: Dockerfile
+    http_port: 80
+    instance_count: 1
+    instance_size_slug: basic-xxs # Basic tier, smallest size (~$5.00/month)
+    routes:
+      - path: /
+    envs:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: DB_CONNECTION
+        value: mysql
+      - key: RUN_MIGRATIONS
+        value: "true"
+      # Note: APP_KEY and DB credentials should be added as encrypted secrets in the DigitalOcean dashboard.
