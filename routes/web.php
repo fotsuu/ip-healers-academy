@@ -13,9 +13,7 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminProfileController;
 
 Route::get('/', function () {
-    $featuredPlants = \Illuminate\Support\Facades\Schema::hasTable('plants')
-        ? \App\Models\Plant::limit(10)->get()
-        : collect();
+    $featuredPlants = \App\Models\Plant::limit(10)->get();
     return view('User.home', compact('featuredPlants'));
 })->name('welcome');
 
