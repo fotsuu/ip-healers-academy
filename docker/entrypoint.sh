@@ -28,18 +28,19 @@ if [ "$DB_CONNECTION" = "mysql" ]; then
     echo "Database is ready!"
 fi
 
-# Cache configuration, routes, and views if running in production
-if [ "$APP_ENV" = "production" ]; then
-    echo "Caching configuration and routes for production..."
-    php artisan config:cache
-    php artisan route:cache
-    php artisan view:cache
-fi
-
-# Run database migrations if requested
+# Run database migrations before caching config (schema must exist first)
 if [ "$RUN_MIGRATIONS" = "true" ]; then
     echo "Running database migrations..."
     php artisan migrate --force
+fi
+
+# Cache configuration, routes, and views if running in production
+if [ "$APP_ENV" = "production" ]; then
+    echo "Caching configuration and routes for production..."
+    php artisan config:clear
+    php artisan config:cache
+    php artisan route:cache
+    php artisan view:cache
 fi
 
 # Execute the container's main command
