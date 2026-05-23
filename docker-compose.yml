@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: ip-healers-academy-app
+    image: ghcr.io/fotsuu/ip-healers-academy:latest
     ports:
       - "8000:80"
     environment:
