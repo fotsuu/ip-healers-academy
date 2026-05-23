@@ -454,17 +454,17 @@
             </div>
             <div class="footer-col" style="min-width:140px;">
                 <div class="footer-col-title" style="font-weight: 700; color: #fff; margin-bottom: 10px; font-size: 1.08rem; letter-spacing: 1px;">EXPLORE</div>
-                <a href="#" style="display:block;color:#e3e7df;text-decoration:none;margin-bottom:6px;">Plants</a>
-                <a href="#" style="display:block;color:#e3e7df;text-decoration:none;margin-bottom:6px;">Healers</a>
-                <a href="#" style="display:block;color:#e3e7df;text-decoration:none;margin-bottom:6px;">Tutorials</a>
-                <a href="#" style="display:block;color:#e3e7df;text-decoration:none;">About Us</a>
+                <a href="/plants" style="display:block;color:#e3e7df;text-decoration:none;margin-bottom:6px;">Plants</a>
+                <a href="/healers" style="display:block;color:#e3e7df;text-decoration:none;margin-bottom:6px;">Healers</a>
+                <a href="/tutorials" style="display:block;color:#e3e7df;text-decoration:none;margin-bottom:6px;">Tutorials</a>
+                <a href="/about" style="display:block;color:#e3e7df;text-decoration:none;">About Us</a>
             </div>
             <div class="footer-col" style="min-width:140px;">
                 <div class="footer-col-title" style="font-weight: 700; color: #fff; margin-bottom: 10px; font-size: 1.08rem; letter-spacing: 1px;">SUPPORT</div>
-                <a href="#" style="display:block;color:#e3e7df;text-decoration:none;margin-bottom:6px;">Feedback</a>
-                <a href="#" style="display:block;color:#e3e7df;text-decoration:none;margin-bottom:6px;">Privacy Policy</a>
-                <a href="#" style="display:block;color:#e3e7df;text-decoration:none;margin-bottom:6px;">Terms of Service</a>
-                <a href="#" style="display:block;color:#e3e7df;text-decoration:none;">Contact</a>
+                <a href="/feedback" style="display:block;color:#e3e7df;text-decoration:none;margin-bottom:6px;">Feedback</a>
+                <a href="/privacy" style="display:block;color:#e3e7df;text-decoration:none;margin-bottom:6px;">Privacy Policy</a>
+                    <a href="/terms" style="display:block;color:#e3e7df;text-decoration:none;margin-bottom:6px;">Terms of Service</a>
+                    <a href="/contact" style="display:block;color:#e3e7df;text-decoration:none;">Contact</a>
             </div>
         </div>
         <div class="footer-bottom" style="border-top: 1px solid rgba(255,255,255,0.08); max-width: 1300px; margin: 0 auto; padding: 18px 24px 12px 24px; display: flex; justify-content: space-between; align-items: center; color: #d3e6d3; font-size: 1rem; flex-wrap: wrap;">

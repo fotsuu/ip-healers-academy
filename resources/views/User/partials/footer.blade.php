@@ -26,17 +26,17 @@
         </div>
         <div class="footer-col">
             <div class="footer-col-title">EXPLORE</div>
-            <a href="#">Plants</a>
-            <a href="#">Healers</a>
-            <a href="#">Tutorials</a>
-            <a href="#">About Us</a>
+            <a href="/plants">Plants</a>
+            <a href="/healers">Healers</a>
+            <a href="/tutorials">Tutorials</a>
+            <a href="/about">About Us</a>
         </div>
         <div class="footer-col">
             <div class="footer-col-title">SUPPORT</div>
-            <a href="#">Feedback</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Contact</a>
+            <a href="/feedback">Feedback</a>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Service</a>
+            <a href="/contact">Contact</a>
         </div>
     </div>
     <div class="footer-bottom">

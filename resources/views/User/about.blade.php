@@ -644,7 +644,7 @@
         <div class="about-join-desc">Whether you're an indigenous healer, a plant enthusiast, or someone who values traditional knowledge, there's a place for you in our community.</div>
         <div class="about-join-buttons">
             <a href="/register" class="about-join-btn">Create Account</a>
-            <a href="#" class="about-contact-btn">Contact Us</a>
+            <a href="/contact" class="about-contact-btn">Contact Us</a>
         </div>
     </section>
     @include('User.partials.footer')

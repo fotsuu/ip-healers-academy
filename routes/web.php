@@ -58,6 +58,18 @@ Route::get('/about', function () {
     return view('User.about');
 })->name('about');
 
+Route::get('/privacy', function () {
+    return view('User.privacy');
+})->name('privacy');
+
+Route::get('/terms', function () {
+    return view('User.terms');
+})->name('terms');
+
+Route::get('/contact', function () {
+    return view('User.contact');
+})->name('contact');
+
 Route::get('/feedback', [App\Http\Controllers\FeedbackController::class, 'userForm'])->name('feedback');
 Route::post('/feedback', [App\Http\Controllers\FeedbackController::class, 'store'])->name('feedback.submit');
 
