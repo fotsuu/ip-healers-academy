@@ -294,16 +294,16 @@
             <span>IP Healers Academy</span>
         </div>
         <div class="nav-links">
-            <a href="/home" class="nav-link @if(request()->is('home')) active @endif">Home</a>
-            <a href="/plants" class="nav-link @if(request()->is('plants')) active @endif">Plants</a>
+            <a href="/home" class="nav-link @if(\Request::is('home')) active @endif">Home</a>
+            <a href="/plants" class="nav-link @if(\Request::is('plants')) active @endif">Plants</a>
                 @auth
-                    <a href="/healers" class="nav-link @if(request()->is('healers')) active @endif">Healers</a>
+                    <a href="/healers" class="nav-link @if(\Request::is('healers')) active @endif">Healers</a>
                 @else
                     <a href="/register" id="healers-guest-link" class="nav-link">Healers</a>
                 @endauth
-            <a href="/tutorials" class="nav-link @if(request()->is('tutorials')) active @endif">Tutorials</a>
-            <a href="/about" class="nav-link @if(request()->is('about')) active @endif">About</a>
-            <a href="/feedback" class="nav-link @if(request()->is('feedback*')) active @endif">Feedback</a>
+            <a href="/tutorials" class="nav-link @if(\Request::is('tutorials')) active @endif">Tutorials</a>
+            <a href="/about" class="nav-link @if(\Request::is('about')) active @endif">About</a>
+            <a href="/feedback" class="nav-link @if(\Request::is('feedback*')) active @endif">Feedback</a>
         </div>
     </div>
     <div class="navbar-right">
@@ -372,16 +372,16 @@
 <!-- Mobile Menu Overlay -->
 <div class="mobile-menu-overlay" id="mobile-menu-overlay">
     <div class="mobile-nav-links">
-        <a href="/home" class="mobile-nav-link @if(request()->is('home')) active @endif">Home</a>
-        <a href="/plants" class="mobile-nav-link @if(request()->is('plants')) active @endif">Plants</a>
+        <a href="/home" class="mobile-nav-link @if(\Request::is('home')) active @endif">Home</a>
+        <a href="/plants" class="mobile-nav-link @if(\Request::is('plants')) active @endif">Plants</a>
             @auth
-                <a href="/healers" class="mobile-nav-link @if(request()->is('healers')) active @endif">Healers</a>
+                <a href="/healers" class="mobile-nav-link @if(\Request::is('healers')) active @endif">Healers</a>
             @else
                 <a href="/register" id="healers-mobile-guest-link" class="mobile-nav-link">Healers</a>
             @endauth
-        <a href="/tutorials" class="mobile-nav-link @if(request()->is('tutorials')) active @endif">Tutorials</a>
-        <a href="/about" class="mobile-nav-link @if(request()->is('about')) active @endif">About</a>
-        <a href="/feedback" class="mobile-nav-link @if(request()->is('feedback*')) active @endif">Feedback</a>
+        <a href="/tutorials" class="mobile-nav-link @if(\Request::is('tutorials')) active @endif">Tutorials</a>
+        <a href="/about" class="mobile-nav-link @if(\Request::is('about')) active @endif">About</a>
+        <a href="/feedback" class="mobile-nav-link @if(\Request::is('feedback*')) active @endif">Feedback</a>
     </div>
     <div class="mobile-auth-section">
         @auth
