@@ -294,16 +294,16 @@
             <span>IP Healers Academy</span>
         </div>
         <div class="nav-links">
-            <a href="/home" class="nav-link @if(\Request::is('home')) active @endif">Home</a>
-            <a href="/plants" class="nav-link @if(\Request::is('plants')) active @endif">Plants</a>
-                @auth
-                    <a href="/healers" class="nav-link @if(\Request::is('healers')) active @endif">Healers</a>
+            <a href="/home" class="nav-link @if(\Illuminate\Support\Facades\Request::is('home')) active @endif">Home</a>
+            <a href="/plants" class="nav-link @if(\Illuminate\Support\Facades\Request::is('plants')) active @endif">Plants</a>
+                @if(\Illuminate\Support\Facades\Auth::check())
+                    <a href="/healers" class="nav-link @if(\Illuminate\Support\Facades\Request::is('healers')) active @endif">Healers</a>
                 @else
                     <a href="/register" id="healers-guest-link" class="nav-link">Healers</a>
-                @endauth
-            <a href="/tutorials" class="nav-link @if(\Request::is('tutorials')) active @endif">Tutorials</a>
-            <a href="/about" class="nav-link @if(\Request::is('about')) active @endif">About</a>
-            <a href="/feedback" class="nav-link @if(\Request::is('feedback*')) active @endif">Feedback</a>
+                @endif
+            <a href="/tutorials" class="nav-link @if(\Illuminate\Support\Facades\Request::is('tutorials')) active @endif">Tutorials</a>
+            <a href="/about" class="nav-link @if(\Illuminate\Support\Facades\Request::is('about')) active @endif">About</a>
+            <a href="/feedback" class="nav-link @if(\Illuminate\Support\Facades\Request::is('feedback*')) active @endif">Feedback</a>
         </div>
     </div>
     <div class="navbar-right">
@@ -312,7 +312,7 @@
             <span></span>
             <span></span>
         </button>
-        @auth
+        @if(\Illuminate\Support\Facades\Auth::check())
         <form method="POST" action="{{ route('logout') }}" id="logoutForm-user-navbar" style="display:inline;">
             @csrf
             <button type="button" class="sign-in-btn" id="showLogoutModal-user-navbar">
@@ -362,7 +362,7 @@
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12H3"/><path d="M8 7l-5 5 5 5"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             Sign In
         </a>
-        @endauth
+        @endif
     </div>
 </nav>
 
@@ -372,19 +372,19 @@
 <!-- Mobile Menu Overlay -->
 <div class="mobile-menu-overlay" id="mobile-menu-overlay">
     <div class="mobile-nav-links">
-        <a href="/home" class="mobile-nav-link @if(\Request::is('home')) active @endif">Home</a>
-        <a href="/plants" class="mobile-nav-link @if(\Request::is('plants')) active @endif">Plants</a>
-            @auth
-                <a href="/healers" class="mobile-nav-link @if(\Request::is('healers')) active @endif">Healers</a>
+        <a href="/home" class="mobile-nav-link @if(\Illuminate\Support\Facades\Request::is('home')) active @endif">Home</a>
+        <a href="/plants" class="mobile-nav-link @if(\Illuminate\Support\Facades\Request::is('plants')) active @endif">Plants</a>
+            @if(\Illuminate\Support\Facades\Auth::check())
+                <a href="/healers" class="mobile-nav-link @if(\Illuminate\Support\Facades\Request::is('healers')) active @endif">Healers</a>
             @else
                 <a href="/register" id="healers-mobile-guest-link" class="mobile-nav-link">Healers</a>
-            @endauth
-        <a href="/tutorials" class="mobile-nav-link @if(\Request::is('tutorials')) active @endif">Tutorials</a>
-        <a href="/about" class="mobile-nav-link @if(\Request::is('about')) active @endif">About</a>
-        <a href="/feedback" class="mobile-nav-link @if(\Request::is('feedback*')) active @endif">Feedback</a>
+            @endif
+        <a href="/tutorials" class="mobile-nav-link @if(\Illuminate\Support\Facades\Request::is('tutorials')) active @endif">Tutorials</a>
+        <a href="/about" class="mobile-nav-link @if(\Illuminate\Support\Facades\Request::is('about')) active @endif">About</a>
+        <a href="/feedback" class="mobile-nav-link @if(\Illuminate\Support\Facades\Request::is('feedback*')) active @endif">Feedback</a>
     </div>
     <div class="mobile-auth-section">
-        @auth
+        @if(\Illuminate\Support\Facades\Auth::check())
         <form method="POST" action="{{ route('logout') }}" id="mobileLogoutForm" style="display:block;">
             @csrf
             <button type="button" class="mobile-sign-in-btn" id="showLogoutModal-mobile">
@@ -442,7 +442,7 @@
 <!-- ensure every page's content starts below the fixed navbar -->
 <div class="site-content-offset" aria-hidden="true"></div>
 
-@guest
+@if(\Illuminate\Support\Facades\Auth::guest())
 <!-- Guest-only modal shown when clicking Healers -->
 <div id="guestHealerModal" style="display:none;position:fixed;z-index:2100;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.45);align-items:center;justify-content:center;">
     <div style="background:#fff;border-radius:12px;max-width:420px;width:92%;padding:20px 20px;box-shadow:0 8px 40px rgba(0,0,0,0.2);margin:0 auto;">
@@ -465,19 +465,19 @@ document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById('guestHealerModal');
     var cancelBtn = document.getElementById('guestHealerCancel');
     var signInBtn = document.getElementById('guestHealerSignIn');
-
+ 
     function showModal(e) {
         if (e) e.preventDefault();
         if (modal) modal.style.display = 'flex';
     }
-
+ 
     if (guestLink) guestLink.addEventListener('click', showModal);
     if (mobileGuestLink) mobileGuestLink.addEventListener('click', function(e){ e.preventDefault(); showModal(); document.getElementById('mobile-menu-toggle').click(); });
     if (cancelBtn) cancelBtn.addEventListener('click', function(e){ e.preventDefault(); if (modal) modal.style.display = 'none'; });
     if (signInBtn) signInBtn.addEventListener('click', function(){ /* natural navigation to /login */ });
 });
 </script>
-@endguest
+@endif
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
