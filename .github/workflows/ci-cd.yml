@@ -123,25 +123,44 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
-      - name: Copy docker-compose.yml to Droplet
+      - name: Copy Production Compose File to Droplet
         uses: appleboy/scp-action@917f8b81dfc1ccd331fef9e2d61bdc6c8be94634 # v0.1.7
         with:
           host: ${{ secrets.DROPLET_IP }}
           username: root
           key: ${{ secrets.DROPLET_SSH_KEY }}
-          source: "docker-compose.yml"
+          source: "docker-compose.prod.yml"
           target: "~/app"
 
       - name: SSH and Deploy
         uses: appleboy/ssh-action@0ff4204d59e8e51228ff73bce53f80d53301dee2 # v1.2.5
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          APP_KEY: ${{ secrets.APP_KEY }}
+          DB_DATABASE: ethno_capstone
+          DB_USERNAME: ethno_user
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_ROOT_PASSWORD: ${{ secrets.DB_ROOT_PASSWORD }}
         with:
           host: ${{ secrets.DROPLET_IP }}
           username: root
           key: ${{ secrets.DROPLET_SSH_KEY }}
+          envs: GHCR_TOKEN,GITHUB_ACTOR,APP_KEY,DB_DATABASE,DB_USERNAME,DB_PASSWORD,DB_ROOT_PASSWORD
           script: |
             mkdir -p ~/app
             cd ~/app
-            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-            docker compose pull
-            docker compose up -d
+            # Write .env file for docker compose
+            cat > .env << EOF
+            APP_KEY=${APP_KEY}
+            DB_DATABASE=${DB_DATABASE}
+            DB_USERNAME=${DB_USERNAME}
+            DB_PASSWORD=${DB_PASSWORD}
+            DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+            EOF
+            # Authenticate to GHCR and deploy
+            echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+            docker compose -f docker-compose.prod.yml pull
+            docker compose -f docker-compose.prod.yml up -d
+
 
