@@ -150,17 +150,14 @@ jobs:
           script: |
             mkdir -p ~/app
             cd ~/app
-            # Write .env file for docker compose
-            cat > .env << EOF
-            APP_KEY=${APP_KEY}
-            DB_DATABASE=${DB_DATABASE}
-            DB_USERNAME=${DB_USERNAME}
-            DB_PASSWORD=${DB_PASSWORD}
-            DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
-            EOF
+            # Write .env file for docker compose (no indentation to avoid leading spaces)
+            printf "APP_KEY=%s\nAPP_PORT=80\nDB_DATABASE=%s\nDB_USERNAME=%s\nDB_PASSWORD=%s\nDB_ROOT_PASSWORD=%s\n" \
+              "$APP_KEY" "$DB_DATABASE" "$DB_USERNAME" "$DB_PASSWORD" "$DB_ROOT_PASSWORD" > .env
             # Authenticate to GHCR and deploy
             echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
             docker compose -f docker-compose.prod.yml pull
             docker compose -f docker-compose.prod.yml up -d
+            # Show running containers for verification
+            docker compose -f docker-compose.prod.yml ps
 
 
