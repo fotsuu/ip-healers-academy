@@ -529,7 +529,7 @@
         <div class="healers-search-wrapper">
             <div class="healers-search-container">
                 <div style="position:relative;">
-                    <form class="healers-search-bar" method="GET" action="{{ route('healers') }}" autocomplete="off">
+                    <form class="healers-search-bar" method="GET" action="{{ route('healers') }}" autocomplete="off" data-search-url="{{ route('healers.search') }}">
                         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                         <input class="healers-search-input" type="text" name="search" id="healer-search-input" value="{{ request('search') }}" placeholder="Search healers by name, location, or specialty...">
                     </form>
@@ -561,9 +561,9 @@
                         <div class="healer-info-row"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 018 8c0 7-8 12-8 12S4 17 4 10a8 8 0 018-8z"/></svg> <span class="healer-info-label">Ethnic Group:</span> <span class="healer-info-value">{{ $healer->ethnic_group }}</span></div>
                         <div class="healer-info-row"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> <span class="healer-info-label">Specialization:</span> <span class="healer-info-value">{{ $healer->specialization }}</span></div>
                         <div class="healer-info-row"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 21c-4.97 0-9-4.03-9-9 0-4.97 4.03-9 9-9s9 4.03 9 9c0 4.97-4.03 9-9 9zm0 0c0-4.97 4.03-9 9-9m-9 9c0-4.97-4.03-9-9-9m9 9c-2.21 0-4-1.79-4-4 0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.21-1.79 4-4 4z"/></svg> <span class="healer-info-label">Location:</span> <span class="healer-info-value">{{ $healer->location }}</span></div>
-                        <button class="healer-profile-btn" onclick="window.location.href='{{ route('healers.show', ['id' => $healer->id]) }}'">
+                        <a href="{{ route('healers.show', ['id' => $healer->id]) }}" class="healer-profile-btn" style="text-decoration: none; justify-content: center; box-sizing: border-box;">
                             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> View Profile
-                        </button>
+                        </a>
                     </div>
                 </div>
             @empty
@@ -734,10 +734,13 @@
     <!-- Footer End -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEKtZSczA8iiWRrskKx_5BQurBrXAbdWA&callback=initMap" async defer></script>
+    <script id="healers-data-json" type="application/json">
+        {!! json_encode($healers) !!}
+    </script>
     <script>
     let map;
     let markers = [];
-    let healersData = @json($healers);
+    let healersData = JSON.parse(document.getElementById('healers-data-json').textContent);
 
     function initMap() {
         // Initialize Google Map
@@ -857,7 +860,8 @@
                 $suggestions.hide();
                 return;
             }
-            $.get('{{ route('healers.search') }}', {q: query}, function(data) {
+            var searchUrl = $('.healers-search-bar').data('search-url');
+            $.get(searchUrl, {q: query}, function(data) {
                 $suggestions.empty();
                 if (data.length === 0) {
                     $suggestions.hide();
