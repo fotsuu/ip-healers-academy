@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@0e363065b7507119f95d8205f93933c042e5b721 # v2.30.4
+        uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # v2.37.1
         with:
           php-version: '8.2'
           extensions: dom, curl, libxml, mbstring, zip, pdo, sqlite, pdo_sqlite, bcmath, gd, intl
@@ -32,14 +32,14 @@ jobs:
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache Composer Dependencies
-        uses: actions/cache@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4.0.2
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Cache Node Modules
-        uses: actions/cache@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4.0.2
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
