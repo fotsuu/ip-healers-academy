@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     image: ghcr.io/fotsuu/ip-healers-academy:latest
     ports:
-      - "8000:80"
+      - "${APP_PORT:-8000}:80"
     environment:
       - APP_ENV=local
       - APP_DEBUG=true
