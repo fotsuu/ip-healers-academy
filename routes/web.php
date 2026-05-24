@@ -48,7 +48,7 @@ Route::get('/plants', [PlantController::class, 'userIndex'])->name('plants');
 
 Route::get('/plants/search', [PlantController::class, 'search'])->name('plants.search');
 
-Route::get('/healers', [HealerController::class, 'publicIndex'])->name('healers');
+Route::get('/healers', [HealerController::class, 'publicIndex'])->name('healers')->middleware('auth');
 
 Route::get('/healers/search', [HealerController::class, 'search'])->name('healers.search');
 

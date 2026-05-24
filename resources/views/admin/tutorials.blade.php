@@ -931,8 +931,8 @@
                 </div>
             </div>
             <!-- Add New Tutorial Modal -->
-            <div id="addTutorialModal" class="modal" style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100vw; height:100vh; background:rgba(38,58,41,0.18); align-items:center; justify-content:center;">
-                <div style="background:#fff; border-radius:12px; max-width:480px; width:95vw; padding:32px 28px; box-shadow:0 4px 32px rgba(44,62,80,0.10); position:relative;">
+            <div id="addTutorialModal" class="modal" style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100vw; height:100vh; background:rgba(38,58,41,0.18); align-items:flex-start; justify-content:center; overflow-y:auto; padding-top:40px;">
+                <div style="background:#fff; border-radius:12px; max-width:480px; width:95vw; padding:32px 28px; box-shadow:0 4px 32px rgba(44,62,80,0.10); position:relative; max-height:90vh; overflow-y:auto;">
                     <div style="font-size:1.3rem; font-weight:700; color:#263a29; margin-bottom:18px;">Add New Tutorial</div>
                     <form id="addTutorialForm" enctype="multipart/form-data">
                         @csrf

@@ -295,26 +295,30 @@
             font-weight: 500;
         }
         .healer-profile-btn {
-            background: #2d5a27;
+            background: #166534;
             color: #fff;
             border: none;
-            border-radius: 6px;
-            padding: 8px 28px;
-            font-size: 1rem;
+            border-radius: 4px;
+            padding: 8px 16px;
+            font-size: 0.82rem;
             font-weight: 600;
             margin-top: auto;
             cursor: pointer;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 6px;
-            transition: background 0.2s;
+            gap: 4px;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 1px 3px rgba(44, 62, 80, 0.08);
+            align-self: flex-start;
+            width: auto;
+            text-decoration: none;
         }
         .healer-profile-btn svg {
-            width: 18px;
-            height: 18px;
+            width: 15px;
+            height: 15px;
         }
         .healer-profile-btn:hover {
-            background: #24481f;
+            background: #14532d;
         }
         /* Responsive Hero Section */
         @media (max-width: 768px) {
@@ -504,7 +508,7 @@
             position: relative;
             z-index: 1;
         }
-        .healer-card a {
+        .healer-card a:not(.healer-profile-btn) {
             display: block;
             width: 100%;
             height: 100%;
@@ -561,7 +565,7 @@
                         <div class="healer-info-row"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 018 8c0 7-8 12-8 12S4 17 4 10a8 8 0 018-8z"/></svg> <span class="healer-info-label">Ethnic Group:</span> <span class="healer-info-value">{{ $healer->ethnic_group }}</span></div>
                         <div class="healer-info-row"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> <span class="healer-info-label">Specialization:</span> <span class="healer-info-value">{{ $healer->specialization }}</span></div>
                         <div class="healer-info-row"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 21c-4.97 0-9-4.03-9-9 0-4.97 4.03-9 9-9s9 4.03 9 9c0 4.97-4.03 9-9 9zm0 0c0-4.97 4.03-9 9-9m-9 9c0-4.97-4.03-9-9-9m9 9c-2.21 0-4-1.79-4-4 0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.21-1.79 4-4 4z"/></svg> <span class="healer-info-label">Location:</span> <span class="healer-info-value">{{ $healer->location }}</span></div>
-                        <a href="{{ route('healers.show', ['id' => $healer->id]) }}" class="healer-profile-btn" style="text-decoration: none; justify-content: center; box-sizing: border-box;">
+                        <a href="{{ route('healers.show', ['id' => $healer->id]) }}" class="healer-profile-btn">
                             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> View Profile
                         </a>
                     </div>
