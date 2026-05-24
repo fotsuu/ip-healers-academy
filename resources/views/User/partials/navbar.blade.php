@@ -304,6 +304,9 @@
             <a href="/tutorials" class="nav-link @if(\Illuminate\Support\Facades\Request::is('tutorials')) active @endif">Tutorials</a>
             <a href="/about" class="nav-link @if(\Illuminate\Support\Facades\Request::is('about')) active @endif">About</a>
             <a href="/feedback" class="nav-link @if(\Illuminate\Support\Facades\Request::is('feedback*')) active @endif">Feedback</a>
+            @if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role === 'admin')
+                <a href="/admin/dashboard" class="nav-link">Admin Dashboard</a>
+            @endif
         </div>
     </div>
     <div class="navbar-right">
@@ -382,6 +385,9 @@
         <a href="/tutorials" class="mobile-nav-link @if(\Illuminate\Support\Facades\Request::is('tutorials')) active @endif">Tutorials</a>
         <a href="/about" class="mobile-nav-link @if(\Illuminate\Support\Facades\Request::is('about')) active @endif">About</a>
         <a href="/feedback" class="mobile-nav-link @if(\Illuminate\Support\Facades\Request::is('feedback*')) active @endif">Feedback</a>
+        @if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role === 'admin')
+            <a href="/admin/dashboard" class="mobile-nav-link">Admin Dashboard</a>
+        @endif
     </div>
     <div class="mobile-auth-section">
         @if(\Illuminate\Support\Facades\Auth::check())
