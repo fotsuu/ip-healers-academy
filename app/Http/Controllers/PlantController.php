@@ -45,7 +45,8 @@ class PlantController extends Controller
                 'preparation_methods_tagakaulo' => 'nullable|string',
                 'preparation_methods_bagobo' => 'nullable|string',
                 'habitat' => 'nullable|string',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                // allow any common image types and increase size limit to 5MB
+                'image' => 'nullable|image|max:5120',
             ]);
 
             if ($request->hasFile('image')) {
@@ -134,7 +135,8 @@ class PlantController extends Controller
             'preparation_methods_tagakaulo' => 'nullable|string',
             'preparation_methods_bagobo' => 'nullable|string',
             'habitat' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // allow any common image types and increase size limit to 5MB
+            'image' => 'nullable|image|max:5120',
         ]);
 
         if ($request->hasFile('image')) {

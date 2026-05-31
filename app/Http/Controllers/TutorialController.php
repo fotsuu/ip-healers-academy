@@ -35,8 +35,11 @@ class TutorialController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'link' => 'required|url|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'link' => 'nullable|url|max:255',
+            'link_tagakaulo' => 'nullable|url|max:255',
+            'link_bagobo' => 'nullable|url|max:255',
+            // Allow any common image type (jpeg, png, gif, webp, svg, bmp)
+            'image' => 'nullable|image|max:5120',
             'description' => 'nullable|string',
             'category' => 'nullable|string|max:255',
             'difficulty' => 'nullable|string|max:255',
@@ -47,6 +50,11 @@ class TutorialController extends Controller
             $file->move(public_path('storage/tutorial_images'), $filename);
             $validated['image'] = 'tutorial_images/' . $filename;
         }
+        // Ensure 'link' is not null to satisfy existing DB schema (column is NOT NULL)
+        if (!array_key_exists('link', $validated) || $validated['link'] === null) {
+            $validated['link'] = '';
+        }
+
         $tutorial = \App\Models\Tutorial::create($validated);
         
         // Log admin activity
@@ -82,10 +90,11 @@ class TutorialController extends Controller
         $tutorial = \App\Models\Tutorial::findOrFail($id);
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'link' => 'required|url|max:255',
+            'link' => 'nullable|url|max:255',
             'link_tagakaulo' => 'nullable|url|max:255',
             'link_bagobo' => 'nullable|url|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // Allow any common image type (jpeg, png, gif, webp, svg, bmp)
+            'image' => 'nullable|image|max:5120',
             'description' => 'nullable|string',
             'category' => 'nullable|string|max:255',
             'difficulty' => 'nullable|string|max:255',
@@ -96,6 +105,11 @@ class TutorialController extends Controller
             $file->move(public_path('storage/tutorial_images'), $filename);
             $validated['image'] = 'tutorial_images/' . $filename;
         }
+        // Ensure 'link' is not null to satisfy existing DB schema (column is NOT NULL)
+        if (!array_key_exists('link', $validated) || $validated['link'] === null) {
+            $validated['link'] = '';
+        }
+
         $tutorial->update($validated);
         
         // Log admin activity

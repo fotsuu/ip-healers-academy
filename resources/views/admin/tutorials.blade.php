@@ -936,7 +936,7 @@
                     <div style="font-size:1.3rem; font-weight:700; color:#263a29; margin-bottom:18px;">Add New Tutorial</div>
                     <form id="addTutorialForm" enctype="multipart/form-data">
                         @csrf
-                        <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Image</label><br><input type="file" name="image" style="width:100%;"></div>
+                        <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Image</label><br><input type="file" name="image" accept="image/*" style="width:100%;"></div>
                         <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Title</label><br><input type="text" name="title" style="width:100%; padding:10px 12px; border:1.5px solid #e3e7df; border-radius:6px; font-size:1rem; background:#f7f8f5; color:#263a29;"></div>
                         <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Description</label><br><textarea name="description" style="width:100%; padding:10px 12px; border:1.5px solid #e3e7df; border-radius:6px; font-size:1rem; background:#f7f8f5; color:#263a29;"></textarea></div>
                         <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Category</label><br>
@@ -973,7 +973,7 @@
         </label>
     </div></div>
                         <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Difficulty</label><br><input type="text" name="difficulty" style="width:100%; padding:10px 12px; border:1.5px solid #e3e7df; border-radius:6px; font-size:1rem; background:#f7f8f5; color:#263a29;"></div>
-                        <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Link (General)</label><br><input type="text" name="link" style="width:100%; padding:10px 12px; border:1.5px solid #e3e7df; border-radius:6px; font-size:1rem; background:#f7f8f5; color:#263a29;"></div>
+                        <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Link (General)</label><br><input type="text" name="link" placeholder="Optional" style="width:100%; padding:10px 12px; border:1.5px solid #e3e7df; border-radius:6px; font-size:1rem; background:#f7f8f5; color:#263a29;"></div>
                         <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Link - Tagakaulo Tribe</label><br><input type="text" name="link_tagakaulo" placeholder="Optional" style="width:100%; padding:10px 12px; border:1.5px solid #e3e7df; border-radius:6px; font-size:1rem; background:#f7f8f5; color:#263a29;"></div>
                         <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Link - Bagobo Tribe</label><br><input type="text" name="link_bagobo" placeholder="Optional" style="width:100%; padding:10px 12px; border:1.5px solid #e3e7df; border-radius:6px; font-size:1rem; background:#f7f8f5; color:#263a29;"></div>
                         <div style="display:flex; gap:12px; justify-content:flex-end; margin-top:24px;"><button type="button" id="cancelAddTutorial" style="background:#e3e7df; color:#263a29; border:none; border-radius:6px; padding:10px 24px; font-size:1rem; font-weight:600; cursor:pointer;">Cancel</button><button type="submit" style="background:#23a36d; color:#fff; border:none; border-radius:6px; padding:10px 24px; font-size:1rem; font-weight:600; cursor:pointer;">Save</button></div>
@@ -987,7 +987,7 @@
                     <form id="editTutorialForm" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="tutorial_id" id="editTutorialId">
-                        <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Image</label><br><input type="file" name="image" id="editTutorialImageInput" style="width:100%;"><div id="editTutorialImagePreview" style="margin-top:8px;"></div></div>
+                        <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Image</label><br><input type="file" name="image" id="editTutorialImageInput" accept="image/*" style="width:100%;"><div id="editTutorialImagePreview" style="margin-top:8px;"></div></div>
                         <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Title</label><br><input type="text" name="title" id="editTutorialTitle" style="width:100%; padding:10px 12px; border:1.5px solid #e3e7df; border-radius:6px; font-size:1rem; background:#f7f8f5; color:#263a29;"></div>
                         <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Description</label><br><textarea name="description" id="editTutorialDescription" style="width:100%; padding:10px 12px; border:1.5px solid #e3e7df; border-radius:6px; font-size:1rem; background:#f7f8f5; color:#263a29;"></textarea></div>
                         <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Category</label><br>
@@ -1024,7 +1024,7 @@
         </label>
     </div></div>
                         <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Difficulty</label><br><input type="text" name="difficulty" id="editTutorialDifficulty" style="width:100%; padding:10px 12px; border:1.5px solid #e3e7df; border-radius:6px; font-size:1rem; background:#f7f8f5; color:#263a29;"></div>
-                        <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Link (General)</label><br><input type="text" name="link" id="editTutorialLink" style="width:100%; padding:10px 12px; border:1.5px solid #e3e7df; border-radius:6px; font-size:1rem; background:#f7f8f5; color:#263a29;"></div>
+                        <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Link (General)</label><br><input type="text" name="link" id="editTutorialLink" placeholder="Optional" style="width:100%; padding:10px 12px; border:1.5px solid #e3e7df; border-radius:6px; font-size:1rem; background:#f7f8f5; color:#263a29;"></div>
                         <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Link - Tagakaulo Tribe</label><br><input type="text" name="link_tagakaulo" id="editTutorialLinkTagakaulo" placeholder="Optional" style="width:100%; padding:10px 12px; border:1.5px solid #e3e7df; border-radius:6px; font-size:1rem; background:#f7f8f5; color:#263a29;"></div>
                         <div style="margin-bottom:16px;"><label style="font-weight:600; color:#295024;">Link - Bagobo Tribe</label><br><input type="text" name="link_bagobo" id="editTutorialLinkBagobo" placeholder="Optional" style="width:100%; padding:10px 12px; border:1.5px solid #e3e7df; border-radius:6px; font-size:1rem; background:#f7f8f5; color:#263a29;"></div>
                         <div style="display:flex; gap:12px; justify-content:flex-end; margin-top:24px;"><button type="button" id="cancelEditTutorial" style="background:#e3e7df; color:#263a29; border:none; border-radius:6px; padding:10px 24px; font-size:1rem; font-weight:600; cursor:pointer;">Cancel</button><button type="submit" style="background:#23a36d; color:#fff; border:none; border-radius:6px; padding:10px 24px; font-size:1rem; font-weight:600; cursor:pointer;">Save</button></div>
@@ -1202,12 +1202,6 @@
                 document.getElementById('editTutorialForm').onsubmit = async function(e) {
                     e.preventDefault();
                     const id = document.getElementById('editTutorialId').value;
-                    const title = document.getElementById('editTutorialTitle').value;
-                    const link = document.getElementById('editTutorialLink').value;
-                    const linkTagakaulo = document.getElementById('editTutorialLinkTagakaulo').value;
-                    const linkBagobo = document.getElementById('editTutorialLinkBagobo').value;
-                    const description = document.getElementById('editTutorialDescription').value;
-                    const difficulty = document.getElementById('editTutorialDifficulty').value;
                     // collect checked categories from edit modal and send as CSV
                     const checkedEdit = Array.from(document.querySelectorAll('#editCategoryOptions input[name="category"]:checked')).map(i=>i.value);
                     const categoriesCsv = checkedEdit.join(',');
@@ -1218,16 +1212,25 @@
                     } else {
                         token = token.content;
                     }
+
                     try {
+                        const form = document.getElementById('editTutorialForm');
+                        const formData = new FormData(form);
+                        // ensure category CSV is set
+                        formData.delete('category');
+                        formData.append('category', categoriesCsv);
+                        // method override for PUT
+                        formData.append('_method', 'PUT');
+
                         const response = await fetch(`/admin/tutorials/${id}`, {
-                            method: 'PUT',
+                            method: 'POST',
                             headers: {
                                 'X-CSRF-TOKEN': token,
                                 'Accept': 'application/json',
-                                'Content-Type': 'application/json',
                             },
-                            body: JSON.stringify({ title, link, link_tagakaulo: linkTagakaulo, link_bagobo: linkBagobo, description, difficulty, category: categoriesCsv })
+                            body: formData
                         });
+
                         if (response.ok) {
                             document.getElementById('editTutorialModal').style.display = 'none';
                             showCustomAlert('success', 'Success', 'Tutorial updated successfully!', function() {

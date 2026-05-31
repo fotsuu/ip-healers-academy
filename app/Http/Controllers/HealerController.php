@@ -44,7 +44,8 @@ class HealerController extends Controller
                 'experience_years' => 'nullable|integer|min:0',
                 'languages' => 'nullable|string|max:255',
                 'about' => 'nullable|string',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                // allow any common image types and increase size limit to 5MB
+                'image' => 'nullable|image|max:5120',
             ]);
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
@@ -115,7 +116,8 @@ class HealerController extends Controller
                 'experience_years' => 'nullable|integer|min:0',
                 'languages' => 'nullable|string|max:255',
                 'about' => 'nullable|string',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                // allow any common image types and increase size limit to 5MB
+                'image' => 'nullable|image|max:5120',
             ]);
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
