@@ -216,6 +216,150 @@
             display: none !important;
         }
     }
+    .plant-tutorial-video {
+        display: none;
+        margin-top: 16px;
+    }
+    .plant-tutorial-video.is-visible {
+        display: block;
+    }
+    .plant-tutorial-video-trigger {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+    }
+    .plant-tutorial-thumb-wrapper {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        background: #e3e7df;
+        box-shadow: 0 2px 12px rgba(44,62,80,0.08);
+    }
+    .plant-tutorial-thumb {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.3s, filter 0.3s;
+    }
+    .plant-tutorial-video-trigger:hover .plant-tutorial-thumb {
+        transform: scale(1.02);
+        filter: brightness(0.95);
+    }
+    .plant-tutorial-play-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(41, 80, 36, 0.9);
+        border-radius: 50%;
+        width: 56px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        transition: all 0.3s;
+    }
+    .plant-tutorial-video-trigger:hover .plant-tutorial-play-overlay {
+        background: rgba(41, 80, 36, 1);
+        transform: translate(-50%, -50%) scale(1.08);
+    }
+    .plant-tutorial-play-overlay svg {
+        width: 26px;
+        height: 26px;
+        color: #fff;
+        margin-left: 3px;
+    }
+    .plant-tutorial-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 10px;
+        color: #295024;
+        font-weight: 600;
+        font-size: 1.05rem;
+    }
+    .tutorial-video-modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(38,58,41,0.25);
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(4px);
+    }
+    .tutorial-video-modal-content {
+        background: #fff;
+        border-radius: 16px;
+        max-width: 90vw;
+        max-height: 90vh;
+        width: 1200px;
+        padding: 24px;
+        box-shadow: 0 12px 48px rgba(44,62,80,0.20);
+        display: flex;
+        flex-direction: column;
+    }
+    .tutorial-video-modal-header {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 12px;
+    }
+    .tutorial-video-close-btn {
+        background: none;
+        border: none;
+        font-size: 1.8rem;
+        color: #6b7b5e;
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+    .tutorial-video-close-btn:hover {
+        background: #e3e7df;
+        color: #263a29;
+    }
+    .tutorial-video-iframe-container {
+        width: 100%;
+        position: relative;
+        background: #000;
+        border-radius: 8px;
+        overflow: hidden;
+        padding-bottom: 56.25%;
+        height: 0;
+    }
+    .tutorial-video-iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+    .tutorial-video-fallback {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 16px;
+        padding: 40px;
+        text-align: center;
+        color: #6b7b5e;
+        background: #fff;
+    }
     </style>
 </head>
 <body style="background:#f7f8f5; margin:0; min-height:100vh; font-family:'Inter', Arial, sans-serif;">
@@ -256,6 +400,29 @@
                         <div id="preparationMethodsContent" data-general="{{ e($plant->preparation_methods) }}" data-tagakaulo="{{ e($plant->preparation_methods_tagakaulo ?? '') }}" data-bagobo="{{ e($plant->preparation_methods_bagobo ?? '') }}" style="font-size:1.12rem; color:#295024;white-space:pre-line; min-height:40px; padding:12px; background:#f7f8f5; border-radius:8px; border:1px solid #e3e7df;">
                             {{ $plant->preparation_methods ?: 'No preparation method available.' }}
                         </div>
+                        @if(isset($tutorial) && $tutorial)
+                        @php
+                            $tutorialThumb = $tutorial->image
+                                ? asset('storage/' . $tutorial->image)
+                                : 'https://via.placeholder.com/700x200?text=Tutorial+Video';
+                        @endphp
+                        <div id="plantTutorialVideo" class="plant-tutorial-video"
+                            data-fallback-image="{{ $tutorialThumb }}">
+                            <a href="#" class="plant-tutorial-video-trigger"
+                                data-tutorial-link="{{ $tutorial->link }}"
+                                data-tutorial-link-tagakaulo="{{ $tutorial->link_tagakaulo ?? '' }}"
+                                data-tutorial-link-bagobo="{{ $tutorial->link_bagobo ?? '' }}"
+                                data-current-tribe="general">
+                                <div class="plant-tutorial-thumb-wrapper">
+                                    <img id="plantTutorialThumb" src="{{ $tutorialThumb }}" alt="{{ $tutorial->title }} tutorial thumbnail" class="plant-tutorial-thumb">
+                                    <div class="plant-tutorial-play-overlay">
+                                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </div>
+                                </div>
+                                <span class="plant-tutorial-label">Watch Tutorial <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
+                            </a>
+                        </div>
+                        @endif
                     </div>
                 </div>
                 <div class="plant-sidebar">
@@ -288,23 +455,82 @@
             </div>
         </div>
     </div>
+    @if(isset($tutorial) && $tutorial)
+    <div class="tutorial-video-modal" id="tutorialVideoModal">
+        <div class="tutorial-video-modal-content">
+            <div class="tutorial-video-modal-header">
+                <button type="button" class="tutorial-video-close-btn" id="closeTutorialVideoModal">&times;</button>
+            </div>
+            <div class="tutorial-video-iframe-container" id="tutorialVideoIframeContainer">
+                <iframe id="tutorialVideoIframe" class="tutorial-video-iframe" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <div class="tutorial-video-fallback" id="tutorialVideoFallback" style="display: none;">
+                    <div style="font-weight: 600; color: #263a29;">Video Cannot Be Embedded</div>
+                    <a href="#" target="_blank" rel="noopener" style="color:#23a36d;text-decoration:none;font-weight:600;font-size:1.1rem;padding:12px 24px;border:2px solid #23a36d;border-radius:8px;">Open Video in New Tab</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
     <script>
-        // Store preparation methods data
+        let currentPreparationTribe = 'general';
+
         const preparationMethods = {
             general: document.getElementById('preparationMethodsContent').getAttribute('data-general') || 'No preparation method available.',
             tagakaulo: document.getElementById('preparationMethodsContent').getAttribute('data-tagakaulo') || 'No preparation method available for Tagakaulo tribe.',
             bagobo: document.getElementById('preparationMethodsContent').getAttribute('data-bagobo') || 'No preparation method available for Bagobo tribe.'
         };
-        
-        // Function to show preparation method based on selected tribe
+
+        function getYoutubeVideoId(url) {
+            if (!url) return null;
+            const match = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+            return match ? match[1] : null;
+        }
+
+        function getYoutubeThumbnail(url) {
+            const videoId = getYoutubeVideoId(url);
+            return videoId ? 'https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg' : null;
+        }
+
+        function getTutorialLinkForTribe(tribe, trigger) {
+            if (!trigger) return '';
+            if (tribe === 'tagakaulo') {
+                return trigger.getAttribute('data-tutorial-link-tagakaulo') || trigger.getAttribute('data-tutorial-link') || '';
+            }
+            if (tribe === 'bagobo') {
+                return trigger.getAttribute('data-tutorial-link-bagobo') || trigger.getAttribute('data-tutorial-link') || '';
+            }
+            return trigger.getAttribute('data-tutorial-link') || '';
+        }
+
+        function updatePlantTutorialVideo(tribe) {
+            const section = document.getElementById('plantTutorialVideo');
+            const trigger = document.querySelector('.plant-tutorial-video-trigger');
+            const thumb = document.getElementById('plantTutorialThumb');
+            if (!section || !trigger) return;
+
+            trigger.setAttribute('data-current-tribe', tribe);
+            const tutorialLink = getTutorialLinkForTribe(tribe, trigger);
+
+            if (tutorialLink) {
+                section.classList.add('is-visible');
+                if (thumb) {
+                    const fallbackImage = section.getAttribute('data-fallback-image');
+                    const youtubeThumb = getYoutubeThumbnail(tutorialLink);
+                    thumb.src = youtubeThumb || fallbackImage;
+                    thumb.alt = 'Tutorial video thumbnail';
+                }
+            } else {
+                section.classList.remove('is-visible');
+            }
+        }
+
         function showPreparationMethod(tribe) {
+            currentPreparationTribe = tribe;
             const contentDiv = document.getElementById('preparationMethodsContent');
             const buttons = document.querySelectorAll('.tribe-btn');
-            
-            // Update content
+
             contentDiv.textContent = preparationMethods[tribe] || 'No preparation method available.';
-            
-            // Update button styles
+
             buttons.forEach(btn => {
                 const btnTribe = btn.getAttribute('data-tribe');
                 if (btnTribe === tribe) {
@@ -317,11 +543,103 @@
                     btn.style.border = '2px solid #295024';
                 }
             });
+
+            updatePlantTutorialVideo(tribe);
         }
-        
-        // Initialize with general method selected
+
+        function convertToEmbedUrl(url) {
+            if (!url) return null;
+
+            const youtubeRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+            const youtubeMatch = url.match(youtubeRegex);
+            if (youtubeMatch) {
+                return { url: 'https://www.youtube.com/embed/' + youtubeMatch[1] + '?autoplay=1&rel=0', embeddable: true };
+            }
+
+            const vimeoRegex = /(?:vimeo\.com\/)(?:.*\/)?(\d+)/;
+            const vimeoMatch = url.match(vimeoRegex);
+            if (vimeoMatch) {
+                return { url: 'https://player.vimeo.com/video/' + vimeoMatch[1] + '?autoplay=1', embeddable: true };
+            }
+
+            if (/\.(mp4|webm|ogg|mov|avi)(\?.*)?$/i.test(url)) {
+                return { url: url, embeddable: true };
+            }
+
+            if (url.includes('/embed/') || url.includes('iframe')) {
+                return { url: url, embeddable: true };
+            }
+
+            return { url: url, embeddable: false };
+        }
+
+        function openTutorialVideoModal(link) {
+            const modal = document.getElementById('tutorialVideoModal');
+            const iframe = document.getElementById('tutorialVideoIframe');
+            const fallback = document.getElementById('tutorialVideoFallback');
+            if (!modal || !iframe || !fallback) return;
+
+            const embedInfo = convertToEmbedUrl(link);
+            iframe.src = '';
+            iframe.style.display = 'none';
+            fallback.style.display = 'none';
+
+            if (embedInfo && embedInfo.embeddable) {
+                iframe.src = embedInfo.url;
+                iframe.style.display = 'block';
+            } else {
+                fallback.style.display = 'flex';
+                const fallbackLink = fallback.querySelector('a');
+                if (fallbackLink) {
+                    fallbackLink.href = link;
+                }
+            }
+
+            modal.style.display = 'flex';
+        }
+
+        function closeTutorialVideoModal() {
+            const modal = document.getElementById('tutorialVideoModal');
+            const iframe = document.getElementById('tutorialVideoIframe');
+            if (!modal || !iframe) return;
+            modal.style.display = 'none';
+            iframe.src = '';
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             showPreparationMethod('general');
+
+            document.addEventListener('click', function(e) {
+                const trigger = e.target.closest('.plant-tutorial-video-trigger');
+                if (!trigger) return;
+                e.preventDefault();
+                e.stopPropagation();
+                const tribe = trigger.getAttribute('data-current-tribe') || currentPreparationTribe || 'general';
+                const tutorialLink = getTutorialLinkForTribe(tribe, trigger);
+                if (tutorialLink) {
+                    openTutorialVideoModal(tutorialLink);
+                }
+            });
+
+            const closeBtn = document.getElementById('closeTutorialVideoModal');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeTutorialVideoModal);
+            }
+
+            const videoModal = document.getElementById('tutorialVideoModal');
+            if (videoModal) {
+                videoModal.addEventListener('click', function(e) {
+                    if (e.target === videoModal) {
+                        closeTutorialVideoModal();
+                    }
+                });
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeTutorialVideoModal();
+                }
+            });
         });
     </script>
 </body>

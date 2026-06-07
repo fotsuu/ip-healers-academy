@@ -23,4 +23,14 @@ class Plant extends Model
     {
         return $this->belongsToMany(Healer::class, 'healer_plant_relations', 'plant_id', 'healer_id');
     }
+
+    public function tutorials()
+    {
+        return $this->belongsToMany(Tutorial::class, 'plant_tutorial_relations', 'plant_id', 'tutorial_id');
+    }
+
+    public function tutorialRelation()
+    {
+        return $this->hasOne(PlantTutorialRelation::class);
+    }
 }

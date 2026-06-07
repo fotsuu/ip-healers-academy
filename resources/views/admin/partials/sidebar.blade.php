@@ -37,6 +37,12 @@
             </svg>
             Relations
         </a>
+        <a href="/admin/plant-tutorial-relations" class="sidebar-link @if(\Illuminate\Support\Facades\Request::is('admin/plant-tutorial-relations')) active @endif">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 2C7 7 2 12 12 22C22 12 17 7 12 2Z"/><polygon points="10,9 16,12 10,15 10,9"/>
+            </svg>
+            Plant Tutorials
+        </a>
         <a href="/admin/tutorials" class="sidebar-link @if(\Illuminate\Support\Facades\Request::is('admin/tutorials')) active @endif">
             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <polygon points="8,5 19,12 8,19 8,5"/>

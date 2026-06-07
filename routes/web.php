@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HealerController;
 use App\Http\Controllers\PlantController;
 use App\Http\Controllers\HealerPlantRelationController;
+use App\Http\Controllers\PlantTutorialRelationController;
 use App\Http\Controllers\IndigenousKnowledgeController;
 use App\Http\Controllers\TutorialController;
 use App\Http\Controllers\FeedbackController;
@@ -82,6 +83,8 @@ Route::get('/admin/plants/{id}', [PlantController::class, 'show'])->middleware('
 
 Route::get('/admin/healer-plant-relations', [HealerPlantRelationController::class, 'index'])->middleware('auth');
 
+Route::get('/admin/plant-tutorial-relations', [PlantTutorialRelationController::class, 'index'])->middleware('auth');
+
 Route::get('/admin/indigenous-knowledge', [IndigenousKnowledgeController::class, 'index'])->middleware('auth');
 
 Route::get('/admin/tutorials', [TutorialController::class, 'index'])->middleware('auth');
@@ -93,6 +96,7 @@ Route::get('/admin/users', [UserController::class, 'index'])->middleware('auth')
 Route::post('/admin/healers', [HealerController::class, 'store'])->middleware('auth');
 Route::post('/admin/plants', [PlantController::class, 'store'])->middleware('auth');
 Route::post('/admin/healer-plant-relations', [HealerPlantRelationController::class, 'store'])->middleware('auth');
+Route::post('/admin/plant-tutorial-relations', [PlantTutorialRelationController::class, 'store'])->middleware('auth');
 Route::post('/admin/indigenous-knowledge', [IndigenousKnowledgeController::class, 'store'])->middleware('auth');
 Route::post('/admin/tutorials', [TutorialController::class, 'store'])->middleware('auth');
 Route::post('/admin/feedback', [FeedbackController::class, 'store'])->middleware('auth');
@@ -106,6 +110,9 @@ Route::delete('/admin/plants/{plant}', [PlantController::class, 'destroy'])->mid
 
 Route::put('/admin/healer-plant-relations/{id}', [HealerPlantRelationController::class, 'update'])->middleware('auth');
 Route::delete('/admin/healer-plant-relations/{id}', [HealerPlantRelationController::class, 'destroy'])->middleware('auth');
+
+Route::put('/admin/plant-tutorial-relations/{id}', [PlantTutorialRelationController::class, 'update'])->middleware('auth');
+Route::delete('/admin/plant-tutorial-relations/{id}', [PlantTutorialRelationController::class, 'destroy'])->middleware('auth');
 
 Route::put('/admin/tutorials/{tutorial}', [TutorialController::class, 'update'])->middleware('auth');
 Route::delete('/admin/tutorials/{tutorial}', [TutorialController::class, 'destroy'])->middleware('auth');

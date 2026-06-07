@@ -16,4 +16,9 @@ class Tutorial extends Model
         'category',
         'difficulty',
     ];
+
+    public function plants()
+    {
+        return $this->belongsToMany(Plant::class, 'plant_tutorial_relations', 'tutorial_id', 'plant_id');
+    }
 }

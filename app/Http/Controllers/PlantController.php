@@ -108,7 +108,8 @@ class PlantController extends Controller
         }
         
         $healers = $plant->healers;
-        return view('User.plant_detail', compact('plant', 'healers'));
+        $tutorial = $plant->tutorials()->first();
+        return view('User.plant_detail', compact('plant', 'healers', 'tutorial'));
     }
 
     /**
