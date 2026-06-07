@@ -152,6 +152,9 @@
             font-weight: 600;
             margin-bottom: 24px;
         }
+        .tutorials-grid {
+            align-items: start;
+        }
         .tutorial-card {
             background: #fff;
             border-radius: 16px;
@@ -220,17 +223,50 @@
             flex-direction: column;
             justify-content: flex-end;
         }
+        .tutorial-card-body {
+            padding: 24px 24px 20px 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .tutorial-card-text {
+            flex: 1;
+        }
+        .tutorial-category {
+            color: #295024;
+            background: #eaf3ea;
+            display: inline-block;
+            padding: 2px 14px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            width: max-content;
+        }
         .tutorial-title {
             font-family: 'Playfair Display', serif;
             font-size: 1.18rem;
             font-weight: 700;
             color: #263a29;
-            margin-bottom: 2px;
+            margin-bottom: 6px;
+            line-height: 1.35;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: calc(1.18rem * 1.35 * 2);
+        }
+        .tutorial-desc-area {
+            min-height: calc(1.05rem * 1.5 * 2 + 1.4rem);
+            margin-bottom: 4px;
+        }
+        .tutorial-desc-area.is-expanded {
+            min-height: auto;
         }
         .tutorial-desc {
-            color: #6b7b5e;
+            color: #495742;
             font-size: 1.05rem;
-            margin-bottom: 8px;
+            margin-bottom: 0;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -247,16 +283,48 @@
             color: #2d5a27;
             font-size: 0.95rem;
             font-weight: 600;
-            cursor: pointer;
+            cursor: default;
             padding: 0;
-            margin-top: 4px;
+            margin-top: 2px;
             text-decoration: none;
             transition: color 0.2s;
             display: inline-block;
+            visibility: hidden;
+            line-height: 1.4;
+            min-height: 1.4rem;
         }
-        .see-more-btn:hover {
+        .see-more-btn.is-visible {
+            visibility: visible;
+            cursor: pointer;
+        }
+        .see-more-btn.is-visible:hover {
             color: #24481f;
             text-decoration: underline;
+        }
+        .tutorial-card-footer {
+            margin-top: auto;
+            padding-top: 10px;
+        }
+        .tutorial-meta {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 14px;
+        }
+        .tutorial-actions {
+            margin-top: 0;
+        }
+        .tutorial-learn-more {
+            color: #295024;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex !important;
+            align-items: center;
+            gap: 6px;
+            font-size: 1.05rem;
+            cursor: pointer;
+            width: auto !important;
+            height: auto !important;
         }
         @media (max-width: 900px) {
             .tutorials-list-section {
@@ -380,7 +448,7 @@
             .tutorial-img, .tutorial-img-wrapper a {
                 height: 140px !important;
             }
-            .tutorial-card-content, .tutorial-card > div:last-child {
+            .tutorial-card-body, .tutorial-card-content, .tutorial-card > div:last-child {
                 padding: 16px 12px 14px 12px !important;
             }
             .tutorial-play-overlay {
@@ -457,30 +525,34 @@
             .tutorial-img, .tutorial-img-wrapper a {
                 height: 120px !important;
             }
-            .tutorial-card-content, .tutorial-card > div:last-child {
+            .tutorial-card-body, .tutorial-card-content, .tutorial-card > div:last-child {
                 padding: 12px 10px 10px 10px !important;
             }
             .tutorial-title {
                 font-size: 0.95rem !important;
                 margin-bottom: 4px !important;
+                min-height: calc(0.95rem * 1.35 * 2);
             }
             .tutorial-desc {
                 font-size: 0.85rem !important;
-                margin-bottom: 8px !important;
+                margin-bottom: 0 !important;
             }
-            .tutorial-card > div:last-child > div:nth-child(2) {
+            .tutorial-desc-area {
+                min-height: calc(0.85rem * 1.5 * 2 + 1.2rem);
+            }
+            .tutorial-category {
                 font-size: 0.8rem !important;
                 padding: 2px 10px !important;
                 margin-bottom: 6px !important;
             }
-            .tutorial-card > div:last-child > div:nth-child(4) {
+            .tutorial-meta {
                 gap: 10px !important;
                 margin-bottom: 8px !important;
             }
-            .tutorial-card > div:last-child > div:nth-child(4) > span {
+            .tutorial-meta span {
                 font-size: 0.8rem !important;
             }
-            .tutorial-card > div:last-child > a {
+            .tutorial-learn-more {
                 font-size: 0.85rem !important;
             }
             .see-more-btn {
@@ -539,23 +611,27 @@
             .tutorial-img, .tutorial-img-wrapper a {
                 height: 100px !important;
             }
-            .tutorial-card-content, .tutorial-card > div:last-child {
+            .tutorial-card-body, .tutorial-card-content, .tutorial-card > div:last-child {
                 padding: 10px 8px 8px 8px !important;
             }
             .tutorial-title {
                 font-size: 0.9rem !important;
+                min-height: calc(0.9rem * 1.35 * 2);
             }
             .tutorial-desc {
                 font-size: 0.8rem !important;
             }
-            .tutorial-card > div:last-child > div:nth-child(2) {
+            .tutorial-desc-area {
+                min-height: calc(0.8rem * 1.5 * 2 + 1.2rem);
+            }
+            .tutorial-category {
                 font-size: 0.75rem !important;
                 padding: 2px 8px !important;
             }
-            .tutorial-card > div:last-child > div:nth-child(4) > span {
+            .tutorial-meta span {
                 font-size: 0.75rem !important;
             }
-            .tutorial-card > div:last-child > a {
+            .tutorial-learn-more {
                 font-size: 0.8rem !important;
             }
             .see-more-btn {
@@ -590,19 +666,23 @@
             .tutorial-img, .tutorial-img-wrapper a {
                 height: 90px !important;
             }
-            .tutorial-card-content, .tutorial-card > div:last-child {
+            .tutorial-card-body, .tutorial-card-content, .tutorial-card > div:last-child {
                 padding: 8px 6px 6px 6px !important;
             }
             .tutorial-title {
                 font-size: 0.85rem !important;
+                min-height: calc(0.85rem * 1.35 * 2);
             }
             .tutorial-desc {
                 font-size: 0.75rem !important;
             }
-            .tutorial-card > div:last-child > div:nth-child(2) {
+            .tutorial-desc-area {
+                min-height: calc(0.75rem * 1.5 * 2 + 1.1rem);
+            }
+            .tutorial-category {
                 font-size: 0.7rem !important;
             }
-            .tutorial-card > div:last-child > a {
+            .tutorial-learn-more {
                 font-size: 0.75rem !important;
             }
             .see-more-btn {
@@ -630,13 +710,10 @@
             position: relative;
             z-index: 1;
         }
-        .tutorial-card a {
+        .tutorial-card a:not(.tutorial-learn-more) {
             display: block;
             width: 100%;
             height: 100%;
-        }
-        .see-more-btn {
-            min-height: 44px;
         }
         .tribe-btn-tutorial:hover {
             transform: translateY(-1px);
@@ -691,19 +768,11 @@
         }
         .tutorial-video-modal-header {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
-            margin-bottom: 18px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #e3e7df;
+            margin-bottom: 12px;
             position: relative;
             z-index: 10;
-        }
-        .tutorial-video-modal-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #263a29;
-            font-family: 'Playfair Display', serif;
         }
         .tutorial-video-close-btn {
             background: none;
@@ -782,9 +851,6 @@
                 max-width: 95vw;
                 padding: 16px;
             }
-            .tutorial-video-modal-title {
-                font-size: 1.1rem;
-            }
             .tutorial-video-iframe-container {
                 padding-bottom: 56.25%; /* Maintain 16:9 on mobile */
             }
@@ -839,21 +905,27 @@
                         </div>
                     </a>
                 </div>
-                <div style="padding:24px 24px 20px 24px;flex:1;display:flex;flex-direction:column;">
-                    <div style="color:#295024;background:#eaf3ea;display:inline-block;padding:2px 14px;border-radius:12px;font-size:1rem;font-weight:600;margin-bottom:8px;width:max-content;">{{ $tutorial->category ?? 'Uncategorized' }}</div>
-                    <div class="tutorial-title" style="font-family:'Playfair Display',serif;font-size:1.18rem;font-weight:700;color:#263a29;margin-bottom:6px;">{{ $tutorial->title }}</div>
-                    <div class="tutorial-desc" style="color:#495742;font-size:1.05rem;margin-bottom:4px;" data-full-text="{{ $tutorial->description }}">{{ $tutorial->description }}</div>
-                    <button class="see-more-btn" style="display:none;">See more</button>
-                    <div style="display:flex;align-items:center;gap:18px;margin-bottom:14px;margin-top:10px;">
-                        <span style="display:flex;align-items:center;gap:6px;color:#295024;font-size:1.01rem;"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg> {{ $tutorial->difficulty ?? 'N/A' }}</span>
-                    </div>
-                    <div style="margin-top:12px;">
-                        <div style="display:flex; gap:8px; margin-bottom:8px; flex-wrap:wrap;">
-                            <button class="tribe-btn-tutorial" data-tribe="general" onclick="showTutorialVideo('general', this)" style="background:#295024; color:#fff; border:none; border-radius:6px; padding:6px 14px; font-size:0.9rem; font-weight:600; cursor:pointer; transition:all 0.2s;">General</button>
-                            <button class="tribe-btn-tutorial" data-tribe="tagakaulo" onclick="showTutorialVideo('tagakaulo', this)" style="background:#eaf3ea; color:#295024; border:2px solid #295024; border-radius:6px; padding:6px 14px; font-size:0.9rem; font-weight:600; cursor:pointer; transition:all 0.2s;">Tagakaulo</button>
-                            <button class="tribe-btn-tutorial" data-tribe="bagobo" onclick="showTutorialVideo('bagobo', this)" style="background:#eaf3ea; color:#295024; border:2px solid #295024; border-radius:6px; padding:6px 14px; font-size:0.9rem; font-weight:600; cursor:pointer; transition:all 0.2s;">Bagobo</button>
+                <div class="tutorial-card-body">
+                    <div class="tutorial-card-text">
+                        <div class="tutorial-category">{{ $tutorial->category ?? 'Uncategorized' }}</div>
+                        <div class="tutorial-title">{{ $tutorial->title }}</div>
+                        <div class="tutorial-desc-area">
+                            <div class="tutorial-desc" data-full-text="{{ $tutorial->description }}">{{ $tutorial->description }}</div>
+                            <button type="button" class="see-more-btn">See more</button>
                         </div>
-                        <a href="#" class="tutorial-video-trigger" data-tutorial-link="{{ $tutorial->link }}" data-tutorial-link-tagakaulo="{{ $tutorial->link_tagakaulo ?? '' }}" data-tutorial-link-bagobo="{{ $tutorial->link_bagobo ?? '' }}" data-tutorial-title="{{ $tutorial->title }}" data-current-tribe="general" style="color:#295024;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-size:1.05rem;cursor:pointer;">Learn more <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>
+                    </div>
+                    <div class="tutorial-card-footer">
+                        <div class="tutorial-meta">
+                            <span style="display:flex;align-items:center;gap:6px;color:#295024;font-size:1.01rem;"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg> {{ $tutorial->difficulty ?? 'N/A' }}</span>
+                        </div>
+                        <div class="tutorial-actions">
+                            <div style="display:flex; gap:8px; margin-bottom:8px; flex-wrap:wrap;">
+                                <button class="tribe-btn-tutorial" data-tribe="general" onclick="showTutorialVideo('general', this)" style="background:#295024; color:#fff; border:none; border-radius:6px; padding:6px 14px; font-size:0.9rem; font-weight:600; cursor:pointer; transition:all 0.2s;">DOH</button>
+                                <button class="tribe-btn-tutorial" data-tribe="tagakaulo" onclick="showTutorialVideo('tagakaulo', this)" style="background:#eaf3ea; color:#295024; border:2px solid #295024; border-radius:6px; padding:6px 14px; font-size:0.9rem; font-weight:600; cursor:pointer; transition:all 0.2s;">Tagakaulo</button>
+                                <button class="tribe-btn-tutorial" data-tribe="bagobo" onclick="showTutorialVideo('bagobo', this)" style="background:#eaf3ea; color:#295024; border:2px solid #295024; border-radius:6px; padding:6px 14px; font-size:0.9rem; font-weight:600; cursor:pointer; transition:all 0.2s;">Bagobo</button>
+                            </div>
+                            <a href="#" class="tutorial-video-trigger tutorial-learn-more" data-tutorial-link="{{ $tutorial->link }}" data-tutorial-link-tagakaulo="{{ $tutorial->link_tagakaulo ?? '' }}" data-tutorial-link-bagobo="{{ $tutorial->link_bagobo ?? '' }}" data-tutorial-title="{{ $tutorial->title }}" data-current-tribe="general">Learn more <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1111,9 +1183,10 @@
         
         tutorialCards.forEach(card => {
             const desc = card.querySelector('.tutorial-desc');
+            const descArea = card.querySelector('.tutorial-desc-area');
             const seeMoreBtn = card.querySelector('.see-more-btn');
             
-            if (desc && seeMoreBtn) {
+            if (desc && descArea && seeMoreBtn) {
                 // Check if description is truncated
                 const lineHeight = parseFloat(getComputedStyle(desc).lineHeight);
                 const maxHeight = lineHeight * 2; // 2 lines
@@ -1121,7 +1194,7 @@
                 // Use a small delay to ensure rendering is complete
                 setTimeout(() => {
                     if (desc.scrollHeight > maxHeight + 5) {
-                        seeMoreBtn.style.display = 'inline-block';
+                        seeMoreBtn.classList.add('is-visible');
                     }
                 }, 100);
                 
@@ -1132,10 +1205,14 @@
                     
                     if (desc.classList.contains('expanded')) {
                         desc.classList.remove('expanded');
+                        descArea.classList.remove('is-expanded');
                         seeMoreBtn.textContent = 'See more';
+                        seeMoreBtn.classList.add('is-visible');
                     } else {
                         desc.classList.add('expanded');
+                        descArea.classList.add('is-expanded');
                         seeMoreBtn.textContent = 'See less';
+                        seeMoreBtn.classList.add('is-visible');
                     }
                 });
             }
@@ -1194,14 +1271,11 @@
         };
     }
     
-    function openTutorialVideoModal(link, title) {
+    function openTutorialVideoModal(link) {
         const modal = document.getElementById('tutorialVideoModal');
         const iframeContainer = document.getElementById('tutorialVideoIframeContainer');
         const iframe = document.getElementById('tutorialVideoIframe');
         const fallback = document.getElementById('tutorialVideoFallback');
-        const modalTitle = document.getElementById('tutorialVideoModalTitle');
-        
-        modalTitle.textContent = title || 'Tutorial Video';
         
         const embedInfo = convertToEmbedUrl(link);
         
@@ -1347,9 +1421,8 @@
                 tutorialLink = link.getAttribute('data-tutorial-link');
             }
             
-            const tutorialTitle = link.getAttribute('data-tutorial-title');
             if (tutorialLink) {
-                openTutorialVideoModal(tutorialLink, tutorialTitle);
+                openTutorialVideoModal(tutorialLink);
             }
         }
     });
@@ -1387,7 +1460,6 @@
     <div class="tutorial-video-modal" id="tutorialVideoModal">
         <div class="tutorial-video-modal-content">
             <div class="tutorial-video-modal-header">
-                <div class="tutorial-video-modal-title" id="tutorialVideoModalTitle">Tutorial Video</div>
                 <button type="button" class="tutorial-video-close-btn" id="closeTutorialVideoModal">&times;</button>
             </div>
             <div class="tutorial-video-iframe-container" id="tutorialVideoIframeContainer">

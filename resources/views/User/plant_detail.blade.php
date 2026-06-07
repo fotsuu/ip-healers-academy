@@ -249,7 +249,7 @@
                         </ul>
                         <div style="font-family: 'Playfair Display', serif; font-size:1.35rem; font-weight:700; color:#263a29; margin-bottom:16px;">Preparation Methods</div>
                         <div style="display:flex; gap:12px; margin-bottom:16px; flex-wrap:wrap;">
-                            <button class="tribe-btn" data-tribe="general" onclick="showPreparationMethod('general')" style="background:#295024; color:#fff; border:none; border-radius:8px; padding:10px 20px; font-size:1rem; font-weight:600; cursor:pointer; transition:all 0.2s;">General</button>
+                            <button class="tribe-btn" data-tribe="general" onclick="showPreparationMethod('general')" style="background:#295024; color:#fff; border:none; border-radius:8px; padding:10px 20px; font-size:1rem; font-weight:600; cursor:pointer; transition:all 0.2s;">DOH</button>
                             <button class="tribe-btn" data-tribe="tagakaulo" onclick="showPreparationMethod('tagakaulo')" style="background:#eaf3ea; color:#295024; border:2px solid #295024; border-radius:8px; padding:10px 20px; font-size:1rem; font-weight:600; cursor:pointer; transition:all 0.2s;">Tagakaulo</button>
                             <button class="tribe-btn" data-tribe="bagobo" onclick="showPreparationMethod('bagobo')" style="background:#eaf3ea; color:#295024; border:2px solid #295024; border-radius:8px; padding:10px 20px; font-size:1rem; font-weight:600; cursor:pointer; transition:all 0.2s;">Bagobo</button>
                         </div>
